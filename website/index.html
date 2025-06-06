@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yurii Kycha Kolot Resume</title>
+    <link rel="stylesheet" href="index.css" >
+  </head>
+  <body>
+    <header class="header">
+      <div class="userCount"></div>
+      <h1>Yurii Kycha Kolot</h1>
+      <ul>
+        <li><a href="mailto:yurii.k.k@icloud.com">yurii.k.k@icloud.com</a></li>
+        <li>Irvine, CA</li>
+        <li>(949) 954-0301</li>
+        <li><a href="https://www.linkedin.com/in/yurii-k-k/">LinkedIn</a></li>
+        <li>No Visa sponsorship require</li>
+        <li>Fully authorized to work</li>
+      </ul>
+    </header>
+    <section class="summary">
+      <h2 class="section-heading">PROFESSIONAL SUMMARY:</h2>
+      <p>
+        Experienced front-end professional with over 9+ years of technical
+        expertise transitioning into a Cloud/Systems Engineer and DevOps-focused
+        career. Proficient in building and managing cloud infrastructure,
+        automating CI/CD pipelines, and containerizing applications. Strong
+        foundation in AWS services and collaborative development environments.
+        Currently preparing for AWS SAA-C03 certification with hands-on
+        experience in cloud infrastructure management, team leadership.
+      </p>
+    </section>
+    <section class="skills">
+        <h2>KEY SKILLS:</h2>
+        <p><b>Cloud Platforms:</b> AWS (EC2, S3, IAM, VPC, Route53, Lambda, CloudFront)</p>
+        <p><b>IaC & Automation:</b> Terraform, CloudFormation, GitLab CI/CD, Bash scripting <br /></p>
+        <p><b>Containers:</b> Docker, Docker Compose (learning Kubernetes)<br /></p>
+        <p><b>DevOps Practices:</b> CI/CD pipelines, Infrastructure provisioning, Monitoring, Server config</p>
+        <p></p><b>Frontend (supporting skillset):</b> React, Next.js, JavaScript, HTML, CSS, REST APIs</p>
+    </section>
+    <section class="experience">
+        <h2>PROFESSIONAL EXPERIENCE:</h2>
+        <div class="position-item">
+            <div class="position-date">
+                <p class="position">Dev Manager / Internal Tools & DevOps </p>
+                <p class="date">06/2022 - Present</p>
+            </div>
+            <p class="company-name">Spiralyze, LLC | Remote</p>
+            <p class="summary-position">Led internal DevOps initiatives, managing AWS infrastructure and building automation tools to streamline development and QA processes across the company.</p>
+            <ul class="achivements">
+                <li>Architected a Flask-based internal tracking microservice integrated with GitLab CI/CD to streamline template usage for the team, resulting in a 2–3x reduction in development time for common experiments</li>
+                <li>Developed reusable A/B testing templates to standardize and accelerate dev workflows. Reduced development time by 15-25%</li>
+                <li>Mentored 8 developers, guiding tech stack choices and deployment processes</li>
+                <li>Orchestrated the setup & optimization of AWS cloud infrastructure for internal tooling & web hosting, leveraging EC2 & S3 services</li>
+                <li>Led cloud-based QA automation efforts for streamlined testing</li>
+            </ul>
+        </div>
+        <div class="position-item">
+            <div class="position-date">
+                <p class="position">Lead Front-End Developer (with Cloud Infrastructure Duties) </p>
+                <p class="date">02/2020 - 06/2022</p>
+            </div>
+            <p class="company-name">Spiralyze, LLC | Remote</p>
+            <p class="summary-position">Directed a small front-end team and handled cloud infrastructure for internal tools, combining development leadership with hands-on AWS provisioning and automation.</p>
+            <ul class="achivements">
+                <li>Provisioned & oversaw AWS infrastructure for a Node.js web scraper utilizing services such as EC2, S3, IAM, & others to achieve a 15% cost reduction</li>
+                <li>Enhanced team workflows by streamlining process automation & comprehensive documentation for internal communication & team collaboration workflows, resulting in a 30% boost in efficiency</li>
+                <li>Mentored 8 developers, guiding tech stack choices and deployment processes</li>
+                <li>Introduced internal performance tools and plugins to reduce QA-reported bugs by 60%</li>
+            </ul>
+        </div>
+        <div class="position-item">
+            <div class="position-date">
+                <p class="position">Frontend Developer</p>
+                <p class="date">10/2015 - 03/2023</p>
+            </div>
+            <p class="company-name">UPWORK(Freelance) | Remote</p>
+            <ul class="achivements">
+                <li>Developed high-quality landing pages and websites in ReactJS to meet diverse client goals, resulting in improved engagement and repeat business</li>
+                <li>Converted static desktop designs into responsive layouts to address usability across devices, ensuring seamless experiences on all screen sizes</li>
+                <li>Implemented cross-browser compatibility fixes to resolve rendering inconsistencies, delivering consistent UX across major browsers</li>
+                <li>Optimized site assets and code to improve load times, boosting performance and user satisfaction</li>
+                <li>Integrated external APIs to expand site functionality, enhancing interactivity and user retention</li>
+                <li>Built a custom GatsbyJS plugin for Cloudinary to streamline image delivery, improving asset management and load performance</li>
+                <li>Conducted manual QA testing to catch critical bugs pre-launch, ensuring smooth deployments and reducing client revisions</li>
+                <li>Collaborated directly with clients and designers to align on UX/UI goals, consistently meeting project deadlines and expectations</li>
+            </ul>
+        </div>
+    </section>
+    <section class="prof-development">
+        <h2>Pofessional development:</h2>
+        <div class="course-item">
+            <b>AWS Certified Cloud Practitioner - 11/2024</b>
+            <a href="https://www.credly.com/badges/8ea3043f-eb33-41fe-ab50-8bd2955f3e8d">Credly</a>
+        </div>
+        <div class="course-item">
+            <b>AWS Certified Solutions Architect - Associate (SAA-C03) Course - Jan 2025</b>
+        </div>
+    </section>
+    <script>
+      // Example of user count update
+      document.addEventListener("DOMContentLoaded", function () {
+        const userCountElement = document.querySelector(".userCount");
+        let userCount = 0; // This would be dynamically updated in a real application
+        userCountElement.textContent = `Current Users Online: ${userCount}`;
+      });
+    </script>
+    <!-- <script src="index.js"></script> -->
+  </body>
+</html>
