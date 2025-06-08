@@ -1,9 +1,7 @@
 name: resume_challenge_infrastructure
 
 on:
-  push:
-    paths:
-      - "infrastructure/**"
+  workflow_dispatch
 jobs:
   infrastructure:
     runs-on: ubuntu-latest
@@ -31,8 +29,6 @@ jobs:
       - run: echo "Deploying Infrastructure"
       - name: Terraform Init
         run: terraform init
-      - name: Terraform Plan
-        run: terraform plan
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
       

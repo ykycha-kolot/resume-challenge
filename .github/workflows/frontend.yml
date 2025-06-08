@@ -4,10 +4,38 @@ on:
   push:
     paths:
       - "website/**"
+
 jobs:
-  frontend:
+  check_bucket:
     runs-on: ubuntu-latest
-    name: Deploy Frontend
+    outputs:
+      bucket_exists: ${{ steps.check.outputs.exists }}
     steps:
-      - run: echo "Deploying Frontend"
-  
+      - uses: actions/checkout@v4
+      - id: check
+        run: |
+          if aws s3api head-bucket --bucket your-frontend-bucket 2>/dev/null; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+  deploy_frontend:
+    needs: check_bucket
+    runs-on: ubuntu-latest
+    if: needs.check_bucket.outputs.bucket_exists == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload website to S3
+        run: aws s3 sync website/ s3://your-frontend-bucket --delete
+
+  trigger_infra:
+    needs: check_bucket
+    runs-on: ubuntu-latest
+    if: needs.check_bucket.outputs.bucket_exists == 'false'
+    steps:
+      - name: Trigger infrastructure workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: infrastructure.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
