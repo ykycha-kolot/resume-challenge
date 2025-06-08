@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 jobs:
   check_bucket:
-    environment: production
+    environment: PROD
     runs-on: ubuntu-latest
     env:
       TF_VAR_s3_bucket_name: ${{ vars.S3_BUCKET_NAME }}
@@ -30,7 +30,7 @@ jobs:
           fi
 
   deploy_frontend:
-    environment: production
+    environment: PROD
     needs: check_bucket
     runs-on: ubuntu-latest
     if: needs.check_bucket.outputs.bucket_exists == 'true'
