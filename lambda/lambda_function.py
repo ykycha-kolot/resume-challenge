@@ -10,7 +10,7 @@ class DecimalEncoder(json.JSONEncoder):
         return super(DecimalEncoder, self).default(obj)
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('UsersNumber')
+table = dynamodb.Table('user_count')
 COUNTER_ID = 'visits'
 
 def lambda_handler(event, context):
@@ -25,11 +25,11 @@ def lambda_handler(event, context):
 
     try:
         route_key = event.get('routeKey')
-        if route_key == "GET /visits":
+        if route_key == "GET /user-count":
             response = table.get_item(Key={'id': COUNTER_ID})
             count = response.get('Item', {}).get('count', 0)
             body = { 'count': count }
-        elif route_key == "POST /visits":
+        elif route_key == "POST /user-count":
             response = table.update_item(
                 Key={'id': COUNTER_ID},
                 UpdateExpression="SET #c = if_not_exists(#c, :zero) + :inc",
