@@ -40,3 +40,4 @@ terraform.rc
 .terragrunt-cache
 
 testing/
+.DS_Store
