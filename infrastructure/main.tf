@@ -20,5 +20,6 @@ locals {
     "script.js"  = "application/javascript"
   }
   s3_origin_id = "resume-bucket-tf_origin"
-  domain_name = "yurii-k.xyz"
+  domain_name  = "yurii-k.xyz"
+  dynamodb_table_name = aws_dynamodb_table.user_count.name
 }
