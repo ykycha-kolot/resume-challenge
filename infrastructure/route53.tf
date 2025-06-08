@@ -1,14 +1,14 @@
-# resource "aws_route53_zone" "my_domain" {
-#   name = local.domain_name
-# }
+resource "aws_route53_zone" "my_domain" {
+  name = var.domain_name
+}
 
 resource "aws_acm_certificate" "domain_cert" {
-  domain_name       = "*.${local.domain_name}"
+  domain_name       = "*.${var.domain_name}"
   validation_method = "DNS"
 }
 
 data "aws_route53_zone" "domain_zone" {
-  name         = local.domain_name
+  name         = var.domain_name
   private_zone = false
 }
 
@@ -36,7 +36,7 @@ resource "aws_acm_certificate_validation" "cert_validation" {
 
 resource "aws_route53_record" "www" {
   zone_id = data.aws_route53_zone.domain_zone.zone_id
-  name    = "www.${local.domain_name}"
+  name    = "www.${var.domain_name}"
   type    = "A"
   alias {
     name                   = aws_cloudfront_distribution.s3_distribution.domain_name
@@ -44,3 +44,14 @@ resource "aws_route53_record" "www" {
     evaluate_target_health = false
   }
 }
+# uncomment after actions infrastructure setup to test
+# resource "aws_route53_record" "default" {
+#   zone_id = data.aws_route53_zone.domain_zone.zone_id
+#   name    = "${var.domain_name}"
+#   type    = "A"
+#   alias {
+#     name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+#     zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
+#     evaluate_target_health = false
+#   }
+# }

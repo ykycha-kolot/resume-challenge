@@ -9,19 +9,19 @@ resource "aws_cloudfront_origin_access_control" "origin_access_control" {
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name              = aws_s3_bucket.resume_bucket_tf.bucket_regional_domain_name
-    origin_id                = local.s3_origin_id
+    origin_id                = var.origin_name
     origin_access_control_id = aws_cloudfront_origin_access_control.origin_access_control.id
   }
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-  aliases             = ["www.${local.domain_name}"]
+  aliases             = ["www.${var.domain_name}"]
   default_cache_behavior {
     compress = true
     viewer_protocol_policy = "redirect-to-https"
     allowed_methods        = [ "GET", "HEAD" ]
     cached_methods         = [ "GET", "HEAD" ]
-    target_origin_id = local.s3_origin_id
+    target_origin_id = var.origin_name
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400

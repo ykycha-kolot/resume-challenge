@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "resume_bucket_tf" {
-  bucket = "resume-bucket-tf" # Ensure this bucket name is globally unique
+  bucket = var.s3_bucket_name
 
 }
 
@@ -43,14 +43,14 @@ resource "aws_s3_bucket_policy" "resume_bucket_policy" {
     ]
   })
 }
-
-resource "aws_s3_object" "dist" {
-  bucket       = aws_s3_bucket.resume_bucket_tf.id
-  for_each     = fileset("${path.module}/../website/", "**/**")
-  key          = each.value
-  source       = "${path.module}/../website/${each.value}"
-  content_type = lookup(local.content_types, basename(each.key), "text/html")
-}
+//Upload website files to S3 bucket using terraform
+# resource "aws_s3_object" "dist" {
+#   bucket       = aws_s3_bucket.resume_bucket_tf.id
+#   for_each     = fileset("${path.module}/../website/", "**/**")
+#   key          = each.value
+#   source       = "${path.module}/../website/${each.value}"
+#   content_type = lookup(local.content_types, basename(each.key), "text/html")
+# }
 
 output "domain_name" {
   value = aws_s3_bucket_website_configuration.resume_website.website_endpoint

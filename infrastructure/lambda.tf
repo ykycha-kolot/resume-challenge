@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "lambda_dynamodb_policy" {
       "dynamodb:Scan",
       "dynamodb:Query"
     ]
-    resources = ["arn:aws:dynamodb:*:*:table/${local.dynamodb_table_name}"]
+    resources = ["arn:aws:dynamodb:*:*:table/${var.dynamodb_table_name}"]
   }
 }
 data "aws_iam_policy_document" "lambda_logs_policy" {

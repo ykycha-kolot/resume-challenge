@@ -1,5 +1,5 @@
 resource "aws_apigatewayv2_api" "http_api" {
-  name          = "get-user-count-api"
+  name          = var.api_gateway_name
   protocol_type = "HTTP"
   cors_configuration {
     allow_methods = ["GET", "POST", "OPTIONS"]

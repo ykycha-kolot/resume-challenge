@@ -2,14 +2,14 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0" # Use the appropriate version
+      version = "~> 5.0"
     }
   }
 }
 
 provider "aws" {
-  region  = "us-east-1" # Replace with your desired region
-  profile = "tf_user"   # Replace with your profile name
+  region  = var.region 
+  profile = var.user_account
 }
 
 locals {
@@ -19,7 +19,4 @@ locals {
     "styles.css" = "text/css"
     "script.js"  = "application/javascript"
   }
-  s3_origin_id = "resume-bucket-tf_origin"
-  domain_name  = "yurii-k.xyz"
-  dynamodb_table_name = aws_dynamodb_table.user_count.name
 }
