@@ -1,4 +1,4 @@
-name: resume_challenge_infrastructure
+name: Infrastructure Provisioning
 
 on:
   push:
@@ -8,6 +8,7 @@ jobs:
   infrastructure:
     runs-on: ubuntu-latest
     name: Deploy Infrastructure
+    environment: production
     env:
       TF_VAR_region: ${{ vars.AWS_REGION }}
       TF_VAR_user_account: ${{ vars.AWS_USER_ACCOUNT }}

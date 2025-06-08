@@ -1,4 +1,4 @@
-name: resume_challenge_backend
+name: Backend Deployment
 
 on:
   push:
