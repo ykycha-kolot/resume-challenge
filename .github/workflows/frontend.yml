@@ -5,6 +5,9 @@ on:
     paths:
       - "website/**"
   workflow_dispatch:
+permissions:
+  contents: read
+  actions: write
 jobs:
   check_bucket:
     environment: PROD
