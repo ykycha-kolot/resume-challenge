@@ -1,0 +1,13 @@
+name: resume_challenge_frontend
+
+on:
+  push:
+    paths:
+      - "website/**"
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    name: Deploy Frontend
+    steps:
+      - run: echo "Deploying Frontend"
+  

@@ -1,0 +1,12 @@
+name: resume_challenge_infrastructure
+
+on:
+  push:
+    paths:
+      - "infrastructure/**"
+jobs:
+  infrastructure:
+    runs-on: ubuntu-latest
+    name: Deploy Infrastructure
+    steps:
+      - run: echo "Deploying Infrastructure"
