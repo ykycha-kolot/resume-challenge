@@ -21,7 +21,7 @@ resource "aws_route53_record" "certificate_record" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = aws_route53_zone.domain_zone.zone_id
+  zone_id         = aws_route53_zone.my_domain.zone_id
 }
 
 resource "aws_acm_certificate_validation" "cert_validation" {
@@ -30,7 +30,7 @@ resource "aws_acm_certificate_validation" "cert_validation" {
 }
 
 resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.domain_zone.zone_id
+  zone_id = aws_route53_zone.my_domain.zone_id
   name    = "www.${var.domain_name}"
   type    = "A"
   alias {
@@ -41,7 +41,7 @@ resource "aws_route53_record" "www" {
 }
 # uncomment after actions infrastructure setup to test
 resource "aws_route53_record" "default" {
-  zone_id = aws_route53_zone.domain_zone.zone_id
+  zone_id = aws_route53_zone.my_domain.zone_id
   name    = "${var.domain_name}"
   type    = "A"
   alias {
