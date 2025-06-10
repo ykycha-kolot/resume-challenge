@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
   region  = var.region 
-  profile = var.user_account
+  # profile = var.user_account
 }
 
 locals {
