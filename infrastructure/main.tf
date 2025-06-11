@@ -5,11 +5,16 @@ terraform {
       version = "~> 5.0"
     }
   }
+  backend "s3" {
+    bucket = "resume-challenge-tf-state"
+    key    = "resume-challenge/terraform.tfstate"
+    region = "us-east-1"
+  }
 }
 
 provider "aws" {
-  region  = var.region 
-  # profile = var.user_account
+  region  = var.region
+  #profile = var.user_account
 }
 
 locals {

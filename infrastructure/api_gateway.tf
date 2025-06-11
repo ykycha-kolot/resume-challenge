@@ -27,7 +27,11 @@ resource "aws_apigatewayv2_route" "user_count_post" {
   route_key = "POST /user-count"
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
 }
-
+resource "aws_apigatewayv2_route" "some_default_route" {
+  api_id    = aws_apigatewayv2_api.http_api.id
+  route_key = "ANY /"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+}
 resource "aws_lambda_permission" "apigw" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"

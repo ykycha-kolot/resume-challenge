@@ -28,9 +28,16 @@ resource "aws_acm_certificate_validation" "cert_validation" {
   certificate_arn         = aws_acm_certificate.domain_cert.arn
   validation_record_fqdns = [for record in aws_route53_record.certificate_record : record.fqdn]
 }
-
+data "aws_route53_zone" "domain_zone" {
+  name         = var.domain_name
+  private_zone = false
+}
+data "aws_acm_certificate" "issued" {
+  domain   = "*.${var.domain_name}"
+  statuses = ["ISSUED"]
+}
 resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.my_domain.zone_id
+  zone_id = data.aws_route53_zone.domain_zone.zone_id
   name    = "www.${var.domain_name}"
   type    = "A"
   alias {
@@ -41,7 +48,7 @@ resource "aws_route53_record" "www" {
 }
 # uncomment after actions infrastructure setup to test
 resource "aws_route53_record" "default" {
-  zone_id = aws_route53_zone.my_domain.zone_id
+  zone_id = data.aws_route53_zone.domain_zone.zone_id
   name    = "${var.domain_name}"
   type    = "A"
   alias {
