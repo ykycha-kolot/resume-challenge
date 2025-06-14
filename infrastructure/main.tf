@@ -21,7 +21,7 @@ locals {
   content_types = {
     "index.html" = "text/html"
     "error.html" = "text/html"
-    "styles.css" = "text/css"
+    "index.css" = "text/css"
     "script.js"  = "application/javascript"
   }
 }
