@@ -39,6 +39,12 @@ jobs:
     if: needs.check_bucket.outputs.bucket_exists == 'true'
     steps:
       - uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
       - name: Upload website to S3
         run: aws s3 sync website/ s3://${{ vars.S3_BUCKET_NAME }} --delete
 
