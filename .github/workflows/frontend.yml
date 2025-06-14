@@ -26,7 +26,7 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
       - id: check
         run: |
-          if aws s3api head-bucket --bucket your-frontend-bucket 2>/dev/null; then
+          if aws s3api head-bucket --bucket ${{ vars.S3_BUCKET_NAME }} 2>/dev/null; then
             echo "exists=true" >> $GITHUB_OUTPUT
           else
             echo "exists=false" >> $GITHUB_OUTPUT
