@@ -41,7 +41,7 @@ def lambda_handler(event, context):
             body = { 'count': count }
         else:
             status_code = 400
-            body = f'Unsupported route soyyyy: "{route_key}"'
+            body = f'Unsupported route: "{route_key}"'
     except Exception as e:
         status_code = 500
         body = str(e)
