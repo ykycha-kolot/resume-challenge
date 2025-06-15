@@ -7,32 +7,23 @@ on:
 jobs:
   backend:
     runs-on: ubuntu-latest
-    name: Deploy Backend
+    name: Backend Deployment
+    environment: PROD
     steps:
-      - run: echo "Deploying Backend"
-    # steps:
-    #   - uses: actions/checkout@v4
-    #   - name: Setup Terraform
-    #     uses: hashicorp/setup-terraform@v2
-    #     with:
-    #       terraform_version: 1.5.7
-    #   - name: Terraform Init
-    #     run: terraform init infrastructure/
-    #   - name: Terraform Apply
-    #     run: terraform apply -auto-approve infrastructure/
-  # frontend:
-  #   runs-on: ubuntu-latest
-  #   needs: changes
-  #   if: ${{ needs.changes.outputs.frontend == 'true' }}
-  #   name: Deploy Frontend
-  #   steps:
-  #     - name: Checkout Code
-  #       uses: actions/checkout@v4
-  #     - name: Setup AWS CLI
-  #       uses: aws-actions/configure-aws-credentials@v3
-  #       with:
-  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  #         aws-region: us-east-1
-  #     - name: Deploy to S3
-  #       run: aws s3 sync website/** s3://your-frontend-bucket --delete
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - run: sudo apt-get install -y zip
+      - name: Zip Lambda Functions
+        working-directory: lambda
+        run: zip lambda_function.zip lambda_function.py
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Update Lambda Function
+        working-directory: lambda
+        run: |
+          aws lambda update-function-code --function-name user_count_lambda \
+          --zip-file fileb://lambda_function.zip
