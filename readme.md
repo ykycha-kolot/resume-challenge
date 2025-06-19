@@ -25,3 +25,23 @@ A fully serverless resume website deployed on AWS, featuring a static frontend a
 ---
 **Link [yurii-k.xyz](https://www.yurii-k.xyz/)**
 **Project by [Yurii Kycha Kolot](https://github.com/ykycha-kolot)**
+
+```mermaid
+flowchart TD
+ subgraph subGraph0["GitHub Actions Workflows"]
+        WF1["frontend.yml"]
+        WF2["backend.yml"]
+        WF3["infrastructure.yml"]
+  end
+    UA["User Browser"] -. DNS lookup .-> R53["Route53"]
+    R53 -- returns domain --> UA
+    UA -- HTTPS --> CF["CloudFront CDN"]
+    CF -- Static assets --> S3["S3 Bucket"]
+    CF -- API requests --> APIGW["API Gateway"]
+    APIGW -- invokes --> LAMBDA["Lambda Function"]
+    LAMBDA -- reads/writes --> DDB["DynamoDB"]
+    R53 -- domain validation --> ACM["ACM"]
+    WF1 -- Deploy static site --> S3
+    WF2 -- Deploy Lambda code --> LAMBDA
+    WF3 --> S3 & CF & APIGW & LAMBDA & DDB & R53 & ACM
+```
