@@ -4,7 +4,7 @@ A fully serverless resume website deployed on AWS, featuring a static frontend a
 
 ## Features
 
-- **Frontend:** Static website built with React, hosted on S3, and delivered via CloudFront.
+- **Frontend:** Static website buil, hosted on S3, and delivered via CloudFront.
 - **Backend:** AWS Lambda function behind API Gateway for dynamic features (e.g., user count).
 - **Infrastructure as Code:** All AWS resources provisioned and managed using Terraform.
 - **CI/CD:** Automated deployment pipelines using GitHub Actions.
