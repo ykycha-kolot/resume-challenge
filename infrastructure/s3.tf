@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "resume_bucket_tf" {
-  bucket = var.s3_bucket_name
-
+  bucket        = var.s3_bucket_name
+  force_destroy = true # allow destroy even if objects were uploaded outside Terraform
 }
 
 resource "aws_s3_bucket_ownership_controls" "ownership_controls" {
