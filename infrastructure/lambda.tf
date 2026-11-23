@@ -56,11 +56,17 @@ resource "aws_iam_role_policy_attachment" "lambda_logs_attach" {
   role       = aws_iam_role.iam_for_lambda.name
   policy_arn = aws_iam_policy.lambda_logs_policy.arn
 }
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_file = "${path.module}/../lambda/lambda_function.py"
+  output_path = "${path.module}/../lambda/lambda_function.zip"
+}
+
 resource "aws_lambda_function" "lambda_function" {
   function_name    = "user_count_lambda"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.13"
-  filename         = "${path.module}/../lambda/lambda_function.zip"
-  source_code_hash = filebase64sha256("${path.module}/../lambda/lambda_function.zip")
+  filename         = data.archive_file.lambda_zip.output_path
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 }
